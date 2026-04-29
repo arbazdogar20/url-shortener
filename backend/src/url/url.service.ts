@@ -9,7 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class UrlService {
   constructor(private prismaService: PrismaService) {}
 
-  async createShortUrl(url: string): Promise<{ shortUrl: string; id: string }> {
+  async createShortUrl(url: string): Promise<{ shortUrl: string; id: string; url: string }> {
     if (!this.isValidUrl(url)) {
       throw new ConflictException('Invalid URL format');
     }
@@ -18,7 +18,7 @@ export class UrlService {
 
     const urlRecord = await this.prismaService.url.create({
       data: { url, shortUrl },
-      select: { shortUrl: true, id: true },
+      select: { shortUrl: true, id: true, url: true },
     });
 
     return urlRecord;
