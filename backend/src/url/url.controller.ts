@@ -9,7 +9,7 @@ export class UrlController {
   @Post()
   createShortUrl(
     @Body() createUrlDto: CreateUrlDto,
-  ): Promise<{ shortUrl: string; id: string }> {
+  ): Promise<{ shortUrl: string; id: string; url: string }> {
     return this.urlService.createShortUrl(createUrlDto.url);
   }
 
