@@ -23,7 +23,7 @@ services:
     build: ./backend
     container_name: backend
     ports:
-      - "3001:3000"
+      - "3001:3001"
     volumes:
       - ./backend:/app
       - /app/node_modules
@@ -32,7 +32,7 @@ services:
         condition: service_healthy
     env_file:
       - ./backend/.env
-    command: sh -c "npx prisma migrate && npm run start:dev"
+    command: sh -c "npx prisma db push && npm run start:dev"
 
   frontend:
     build: ./frontend
